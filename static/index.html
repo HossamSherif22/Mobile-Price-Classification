@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Price Prediction</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+
+    <!-- FontAwesome Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+        body {
+            background: #213759;
+        }
+
+        .container-box {
+            max-width: 850px;
+            margin: 40px auto;
+            background: rgb(166, 78, 255);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .header-icon {
+            font-size: 50px;
+            color: #0d6efd;
+        }
+
+        .form-label i {
+            color: #0d6efd;
+            margin-right: 6px;
+        }
+
+        #result-card {
+            display: none;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-box">
+
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-mobile-screen header-icon"></i>
+            <h2 class="mt-2">Mobile Price Prediction</h2>
+            <p class="text-muted">Predict the price category using ML Regression Model</p>
+        </div>
+
+        <form id="predictForm" class="row g-3">
+
+            <!-- Battery Power -->
+            <div class="col-md-6">
+                <label class="form-label">
+                    <i class="fa-solid fa-battery-full"></i>
+                    Battery Power
+                </label>
+                <input type="number" class="form-control" name="battery_power" required>
+            </div>
+
+            <!-- blue -->
+            <div class="col-md-6">
+                <label class="form-label">
+                    <i class="fa-solid fa-bluetooth-b"></i>
+                    Bluetooth (0/1)
+                </label>
+                <input type="number" class="form-control" name="blue" required>
+            </div>
+
+            <!-- clock_speed -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-gauge"></i> Clock Speed</label>
+                <input type="number" step="0.01" class="form-control" name="clock_speed" required>
+            </div>
+
+            <!-- dual sim -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-sim-card"></i> Dual SIM (0/1)</label>
+                <input type="number" class="form-control" name="dual_sim" required>
+            </div>
+
+            <!-- fc -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-camera"></i> Front Camera</label>
+                <input type="number" step="0.01" class="form-control" name="fc" required>
+            </div>
+
+            <!-- four_g -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-signal"></i> 4G (0/1)</label>
+                <input type="number" class="form-control" name="four_g" required>
+            </div>
+
+            <!-- int memory -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-sd-card"></i> Internal Memory</label>
+                <input type="number" class="form-control" name="int_memory" required>
+            </div>
+
+            <!-- depth -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-ruler-combined"></i> Mobile Depth</label>
+                <input type="number" step="0.01" class="form-control" name="m_dep" required>
+            </div>
+
+            <!-- weight -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-weight-hanging"></i> Mobile Weight</label>
+                <input type="number" class="form-control" name="mobile_wt" required>
+            </div>
+
+            <!-- cores -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-microchip"></i> Number of Cores</label>
+                <input type="number" class="form-control" name="n_cores" required>
+            </div>
+
+            <!-- pc -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-camera-retro"></i> Primary Camera</label>
+                <input type="number" class="form-control" name="pc" required>
+            </div>
+
+            <!-- px -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-image"></i> Pixel Height</label>
+                <input type="number" class="form-control" name="px_height" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-image"></i> Pixel Width</label>
+                <input type="number" class="form-control" name="px_width" required>
+            </div>
+
+            <!-- RAM -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-memory"></i> RAM</label>
+                <input type="number" class="form-control" name="ram" required>
+            </div>
+
+            <!-- Screen -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-mobile"></i> Screen Height</label>
+                <input type="number" class="form-control" name="sc_h" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-mobile"></i> Screen Width</label>
+                <input type="number" class="form-control" name="sc_w" required>
+            </div>
+
+            <!-- Talk Time -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-clock"></i> Talk Time</label>
+                <input type="number" class="form-control" name="talk_time" required>
+            </div>
+
+            <!-- Network -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-signal"></i> 3G (0/1)</label>
+                <input type="number" class="form-control" name="three_g" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-hand-pointer"></i> Touch Screen (0/1)</label>
+                <input type="number" class="form-control" name="touch_screen" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-wifi"></i> WiFi (0/1)</label>
+                <input type="number" class="form-control" name="wifi" required>
+            </div>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fa-solid fa-circle-play"></i> Predict
+                </button>
+            </div>
+        </form>
+
+        <!-- Result Card -->
+        <div id="result-card" class="alert alert-success text-center fw-bold"></div>
+
+    </div>
+
+    <script>
+        document.getElementById("predictForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            let jsonData = {};
+
+            formData.forEach((value, key) => {
+                jsonData[key] = Number(value);
+            });
+
+            const response = await fetch("http://127.0.0.1:8000/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jsonData)
+            });
+
+            const result = await response.json();
+
+            const resultBox = document.getElementById("result-card");
+            resultBox.style.display = "block";
+            resultBox.textContent = "Predicted Price: " + result.prediction;
+        });
+    </script>
+
+</body>
+</html>
